@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:layout_margin="20dp"
+    >
+
+    <TextView
+        android:id="@+id/Heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15sp"
+        android:text="@string/headerText"
+        android:textAlignment="center"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView_school"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Heading"
+        android:padding="15dp"
+        android:text="@string/School"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="18dp" />
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_school"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/textView_school"
+        />
+
+    <TextView
+        android:id="@+id/textView_course"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinner_school"
+        android:layout_marginTop="30dp"
+        android:padding="15dp"
+        android:text="@string/Course"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="18dp" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_course"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/textView_course"
+        />
+
+    <TextView
+        android:id="@+id/textView_batch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinner_course"
+        android:layout_marginTop="30dp"
+        android:padding="15dp"
+        android:text="@string/batch"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="18dp" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_subject"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/textView_batch"
+        />
+
+    <Button
+        android:id="@+id/button_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinner_subject"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:onClick="selectingfeatures"
+        android:text="Submit"
+        android:textAlignment="center" />
+</RelativeLayout>

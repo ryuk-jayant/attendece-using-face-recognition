@@ -1,0 +1,68 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" tools:ignore="DuplicateDefinition">Attendence_nfsu</string>
+    <string name="headerText">Select School, Course and batch</string>
+    <string name="School">Select School</string>
+    <string name="Course">Select Course</string>
+    <string name="batch">Select Subject</string>
+    <string name="take_attendence">Take Attendence</string>
+    <string name="mail_attendence">Mail attendence</string>
+    <string name="logout">Logout</string>
+
+    <string-array name="array_school">
+        <item>Select your School</item>
+        <item>SCSDFS</item>
+        <item>SFS</item>
+        <item>SBS</item>
+    </string-array>
+
+    <string-array name="array_default">
+        <item>Select your course</item>
+    </string-array>
+
+    <string-array name="array_course_SCSDFS">
+        <item>Select your course</item>
+        <item>Btech-Mtech CSE 21-26</item>
+        <item>Btech-Mtech CSE 22-27</item>
+        <item>MSc Cyber Security 22-24</item>
+        <item>MSc Cyber Security 21-23</item>
+        <item>MSc DFIS 22-24</item>
+        <item>Mtech Cyber Security</item>
+    </string-array>
+
+    <string-array name="array_course_SFS">
+        <item>Select your course</item>
+        <item>MSc Forensic Science</item>
+        <item>MSc Toxicology</item>
+        <item>MSc Biotechnology</item>
+    </string-array>
+
+    <string-array name="array_course_SBS">
+        <item>Select your course</item>
+        <item>MSc Clinical Psychology</item>
+        <item>MSc Psychology</item>
+    </string-array>
+
+    <string-array name="Subjects_sem2">
+        <item>Select Your Subjects</item>
+        <item>Math</item>
+        <item>Cryptography</item>
+        <item>Document identification</item>
+        <item>C++ prog</item>
+        <item>AI</item>
+        <item>Forensics</item>
+    </string-array>
+
+    <string-array name="Subjects">
+        <item>Select Your Subjects</item>
+    </string-array>
+
+    <string-array name="Subjects_sem4">
+        <item>Select Your Subjects</item>
+        <item>Math</item>
+        <item>Cryptography</item>
+        <item>networks</item>
+        <item>C++ prog</item>
+        <item>AI</item>
+        <item>Forensics</item>
+    </string-array>
+</resources>
