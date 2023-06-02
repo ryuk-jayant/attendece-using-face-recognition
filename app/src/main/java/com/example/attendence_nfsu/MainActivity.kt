@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         val password=findViewById<EditText>(R.id.Pass)
         val pass= password.editableText.toString()
 
-        val unames= listOf("jkjryuk" to "12345","ramu" to "qwertyuiop")//will be obtained by get request
+        val unames= listOf("jkjryuk" to "12345","ramu" to "qwertyuiop","Ahlad.Kumar" to "Ahlad.12345")//will be obtained by get request
 
         run outsideforeach@{
             unames.forEach { (name, Pass) ->

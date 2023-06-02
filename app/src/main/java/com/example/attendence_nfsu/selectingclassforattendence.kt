@@ -64,7 +64,7 @@ class selectingclassforattendence : AppCompatActivity(){
                             p3: Long
                         ) {
                            infoaboutuser[2]=subjects[p2]
-                            Toast.makeText(this@selectingclassforattendence, subjects[p2], Toast.LENGTH_SHORT).show()
+                            //Toast.makeText(this@selectingclassforattendence, subjects[p2], Toast.LENGTH_SHORT).show()
                         }
 
                         override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -91,6 +91,8 @@ class selectingclassforattendence : AppCompatActivity(){
                if(infoaboutuser[2]!="Select Your Subjects"){
                    val intent = Intent(this@selectingclassforattendence, selectingfeaturesofapp::class.java)
                    intent.putExtra("displayname", displayname)
+
+                   intent.putExtra("infoaboutuser",infoaboutuser)
                    startActivity(intent)
                }
                else{

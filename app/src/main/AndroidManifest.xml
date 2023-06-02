@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature android:name="android.hardware.camera.any" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,6 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Attendence_nfsu"
         tools:targetApi="31">
+        <activity
+            android:name=".takingattendencebycamera"
+            android:screenOrientation="portrait"
+            android:exported="false" />
         <activity
             android:name=".selectingfeaturesofapp"
             android:exported="false" />

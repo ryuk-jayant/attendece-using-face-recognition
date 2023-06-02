@@ -7,6 +7,7 @@
     <string name="take_attendence">Take Attendence</string>
     <string name="mail_attendence">Mail attendence</string>
     <string name="logout">Logout</string>
+    <string name="Click">Click me</string>
 
     <string-array name="array_school">
         <item>Select your School</item>
