@@ -1,14 +1,13 @@
 package com.example.attendence_nfsu
 
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.util.Log
 import android.util.Size
-import android.view.View
-import android.widget.Toast
-import android.content.res.Configuration
 import android.view.SurfaceView
 import com.google.mlkit.vision.face.Face
 import com.google.mlkit.vision.face.FaceLandmark
@@ -36,11 +35,12 @@ class Overlay @JvmOverloads constructor(
     private val dotPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = Color.YELLOW
         style = Paint.Style.FILL
-        strokeWidth = 1.0f
+        strokeWidth = 4.0f
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        Log.d("Overlay","i am for drawing");
         drawOverlay(canvas);
     }
 
@@ -67,9 +67,9 @@ class Overlay @JvmOverloads constructor(
     {
         faces = faceList.toTypedArray()
         //Toast.makeText(takingattendencebycamera., "", Toast.LENGTH_SHORT).show()
-        postInvalidate()
+        Log.d("Overlay","i am set faces");
+        //postInvalidate();
     }
-
     private fun drawOverlay(canvas: Canvas) {
         widthScaleFactor = width.toFloat() // previewWidth
         heightScaleFactor = height.toFloat() // previewHeight

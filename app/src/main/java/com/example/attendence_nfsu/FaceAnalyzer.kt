@@ -2,12 +2,15 @@ package com.example.attendence_nfsu
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Paint
 import android.media.Image
 import android.util.Log
 import android.util.Size
 import android.widget.Toast
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
+import androidx.core.graphics.createBitmap
 import androidx.lifecycle.Lifecycle
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
@@ -35,14 +38,14 @@ class FaceAnalyzer(lifecycle: Lifecycle, private val overlay: Overlay,context:Co
         }
 
         override fun analyze(imageProxy: ImageProxy) {
-            overlay.setPreviewSize(Size(imageProxy.width,imageProxy.height))
+           overlay.setPreviewSize(Size(imageProxy.width,imageProxy.height))
             detectFaces(imageProxy)
         }
 
         private val successListener = OnSuccessListener<List<Face>> { faces ->
             Log.d(TAG, "Number of face detected: " + faces.size)
             //Toast.makeText(context, ""+faces.size+"faces are detected", Toast.LENGTH_SHORT).show()
-            overlay.setFaces(faces,)
+//            overlay.setFaces(faces)
         }
         private val failureListener = OnFailureListener { e ->
             Log.e(TAG, "Face analysis failure.", e)

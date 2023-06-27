@@ -63,7 +63,7 @@ class takingattendencebycamera: AppCompatActivity() {
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT
         )
-        this.addContentView(overlay,layoutOverlay)
+        //this.addContentView(overlay,layoutOverlay)
 
         cameraProviderFuture = ProcessCameraProvider.getInstance(this)
         cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
@@ -98,11 +98,14 @@ class takingattendencebycamera: AppCompatActivity() {
         cameraProviderFuture.addListener({
             val cameraProvider = cameraProviderFuture.get()
             val imageCapture=ImageCapture.Builder().build()
+
+
             // connecting a preview use case to the preview in the xml file.
             val preview = Preview.Builder().build().also{
                 it.setSurfaceProvider(binding.cameraView.surfaceProvider)
             }
-            // ImageAnalysis UseCase
+
+             //ImageAnalysis UseCase
             val analysisUseCase = ImageAnalysis.Builder()
                 .build()
                 .also {
