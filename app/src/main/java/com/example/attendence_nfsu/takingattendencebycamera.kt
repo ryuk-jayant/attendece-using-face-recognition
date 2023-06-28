@@ -154,7 +154,7 @@ class takingattendencebycamera: AppCompatActivity() {
 //
 //    }
     private fun sendRequest(inputText: Array<String>) {
-        val url = "http://192.168.56.1:3000/" // Replace with your API endpoint
+        val url = "http://172.18.6.78:8000/Data" // Replace with your API endpoint
 
         runBlocking {
             GlobalScope.launch(Dispatchers.IO) {
@@ -165,12 +165,12 @@ class takingattendencebycamera: AppCompatActivity() {
                     connection.doOutput = true;
                     val payload = JSONObject()
                     payload.put("school", inputText[0])
-//                    payload.put("course", inputText[1])
-//                    payload.put("subject", inputText[2])
+                    payload.put("course", inputText[1])
+                    payload.put("subject", inputText[2])
 
                     val outputStream = connection.outputStream
                     val writer = OutputStreamWriter(outputStream)
-                    writer.write("iamdata")
+                    writer.write(payload.toString())
                     writer.flush()
                     writer.close()
 
