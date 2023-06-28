@@ -1,36 +1,35 @@
 package com.example.attendence_nfsu
 
 import android.Manifest
-import android.content.ContentValues
 import android.content.ContentValues.TAG
-import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
-import android.widget.Toast
-import androidx.camera.lifecycle.ProcessCameraProvider
 import android.util.Log
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
-import androidx.core.content.PermissionChecker
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.core.content.ContextCompat
 import com.example.attendence_nfsu.databinding.ActivityTakingattendencebycameraBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.common.util.concurrent.ListenableFuture
-import java.nio.ByteBuffer
-import java.text.SimpleDateFormat
-import java.util.Locale
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import org.json.JSONObject
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.io.OutputStreamWriter
+import java.net.HttpURLConnection
+import java.net.URL
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 //typealias LumaListener = (luma: Double) -> Unit
 
@@ -90,7 +89,18 @@ class takingattendencebycamera: AppCompatActivity() {
     }
 
     fun takePhoto() {//takes photo and sends it to post request
-
+        var infoaboutuser=intent.getStringArrayExtra("infoaboutuser");
+//        Toast.makeText(this, (infoaboutuser?.get(0) ?: "data1") + (infoaboutuser?.get(1) ?: "data2")+(infoaboutuser?.get(2) ?: "data3"), Toast.LENGTH_SHORT).show()
+//        var str="";
+//        if (infoaboutuser != null) {
+//            for(s:String in infoaboutuser){
+//                str+=s;
+//            }
+//        };
+//        Toast.makeText(this,str, Toast.LENGTH_SHORT).show()
+        if (infoaboutuser != null) {
+            sendRequest(infoaboutuser)
+        }
     }
 
     private fun startCamera() {//detects face and starts camera and shows preview images
@@ -133,6 +143,66 @@ class takingattendencebycamera: AppCompatActivity() {
                     add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 }
             }.toTypedArray()
+    }
+
+//    private fun sendRequest(Text:Array<String>){
+//        val url="http://127.0.0.1:3000";
+//
+//        // creating a new variable for our request queu
+//        val queue: RequestQueue = Volley.newRequestQueue(this);
+//        StringRequest request = new StringRequest(Request.Method.POST, url,
+//
+//    }
+    private fun sendRequest(inputText: Array<String>) {
+        val url = "http://192.168.56.1:3000/" // Replace with your API endpoint
+
+        runBlocking {
+            GlobalScope.launch(Dispatchers.IO) {
+                try {
+                    val connection = URL(url).openConnection() as HttpURLConnection
+                    connection.requestMethod = "POST"
+                    connection.setRequestProperty("Content-Type", "application/json")
+                    connection.doOutput = true;
+                    val payload = JSONObject()
+                    payload.put("school", inputText[0])
+//                    payload.put("course", inputText[1])
+//                    payload.put("subject", inputText[2])
+
+                    val outputStream = connection.outputStream
+                    val writer = OutputStreamWriter(outputStream)
+                    writer.write("iamdata")
+                    writer.flush()
+                    writer.close()
+
+                    val responseCode = connection.responseCode
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        val inputStream = connection.inputStream
+                        val reader = BufferedReader(InputStreamReader(inputStream))
+                        val response = StringBuilder()
+
+                        var line: String? = reader.readLine()
+                        while (line != null) {
+                            response.append(line)
+                            line = reader.readLine()
+                        }
+
+                        reader.close()
+                        inputStream.close()
+
+                        // Process the response here
+                        Log.e("API",response.toString())
+                        Log.e("API DATA",payload.toString())
+                    } else {
+                        // Handle the error case
+                        Log.e("API","Request failed with response code: $responseCode")
+                    }
+
+                    connection.disconnect()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }
     }
 
 

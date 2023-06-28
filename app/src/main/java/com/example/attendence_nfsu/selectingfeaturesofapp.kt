@@ -32,6 +32,7 @@ class selectingfeaturesofapp : AppCompatActivity() {
         val infoaboutuser=intent.getStringArrayExtra("infoaboutuser")
         //Toast.makeText(this@selectingfeaturesofapp, (infoaboutuser?.get(0) ?: "data1") + (infoaboutuser?.get(1) ?: "data2"), Toast.LENGTH_SHORT).show()
         val intent = Intent(this@selectingfeaturesofapp, takingattendencebycamera::class.java)
+        intent.putExtra("infoaboutuser",infoaboutuser)
         startActivity(intent)
     }
 }
