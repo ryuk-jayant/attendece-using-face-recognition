@@ -1,6 +1,7 @@
 package com.example.attendence_nfsu
 
 import android.Manifest
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
@@ -92,31 +93,36 @@ class takingattendencebycamera: AppCompatActivity() {
     fun takePhoto() {//takes photo and sends it to post request
         var infoaboutuser=intent.getStringArrayExtra("infoaboutuser");
 
-
-        //
+        //return if clicked without loading
         val imageCapture = imageCapture ?: return
 
         val date=Date();
         val name=date.toString();
         val path=name+".jpg";
 
-        val photofile=File(externalMediaDirs[0],path);
+        val photofile=File(applicationContext.filesDir,path);
 
         val outputFileOptions= ImageCapture.OutputFileOptions.Builder(photofile).build()
 
         imageCapture.takePicture(outputFileOptions,
-            ContextCompat.getMainExecutor(this@takingattendencebycamera),
+            ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onError(error: ImageCaptureException)
                 {
-                   Log.e("Image Cap","Error");
+                   Log.e("Image","Error");
                 }
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     // insert your code here.
-                    Log.d("Image Cap","image is Saved on ${photofile.toURI()}")
-                    Toast.makeText(this@takingattendencebycamera,"${photofile.toURI()}",Toast.LENGTH_SHORT).show()
+                    Log.e("Image","image is Saved on ${photofile.toURI()}")
+                   // Toast.makeText(this@takingattendencebycamera,"${photofile.toURI()}",Toast.LENGTH_SHORT).show()
                 }
             })
+
+        try {
+            Thread.sleep(3000) // Wait for 3000 milliseconds (3 seconds)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
 
         if (infoaboutuser != null) {
             sendRequest(infoaboutuser,photofile)
@@ -182,12 +188,12 @@ class takingattendencebycamera: AppCompatActivity() {
                     connection.setRequestProperty("Content-Type", "application/json")
                     connection.doOutput = true;
                     val payload = JSONObject()
-                    val imagebytes = image.readBytes()
-                    val base64image= android.util.Base64.encodeToString(imagebytes,android.util.Base64.DEFAULT)
+//                    val imagebytes = image.readBytes()
+//                    val base64image= android.util.Base64.encodeToString(imagebytes,android.util.Base64.DEFAULT)
                     payload.put("school", inputText[0])
                     payload.put("course", inputText[1])
                     payload.put("subject", inputText[2])
-                    payload.put("IMAGE",base64image)
+                    payload.put("IMAGE",image.toURI())
 
                     val outputStream = connection.outputStream
                     val writer = OutputStreamWriter(outputStream,"UTF-8")
@@ -211,7 +217,7 @@ class takingattendencebycamera: AppCompatActivity() {
                         inputStream.close()
 
                         // Process the response here
-                        Toast.makeText(this@takingattendencebycamera,response.toString(),Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(this@takingattendencebycamera,responseCode.toString(),Toast.LENGTH_SHORT).show()
                         Log.e("API",response.toString())
                         Log.e("API DATA",payload.toString())
                     } else {
